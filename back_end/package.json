@@ -1,0 +1,31 @@
+{
+  "name": "challenge_taylor",
+  "version": "1.0.0",
+  "description": "Challenge Taylor",
+  "main": "app.js",
+  "scripts": {
+    "test": "test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joaopandolfi/challenge_taylor.git"
+  },
+  "keywords": [
+    "Challenge"
+  ],
+  "author": "João Carlos Pandolfi Santana",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joaopandolfi/challenge_taylor/issues"
+  },
+  "homepage": "https://github.com/joaopandolfi/challenge_taylor#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "connect-busboy": "0.0.2",
+    "express": "^4.16.3",
+    "helmet": "^3.12.0",
+    "http": "0.0.0",
+    "https": "^1.0.0",
+    "morgan": "^1.9.0"
+  }
+}
