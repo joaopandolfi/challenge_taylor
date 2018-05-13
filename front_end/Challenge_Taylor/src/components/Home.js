@@ -1,16 +1,31 @@
 import React from 'react';
 
-import { View, Text, TextInput, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, TextInput, StyleSheet, TouchableOpacity , AsyncStorage } from 'react-native';
 
 import {Actions} from 'react-native-router-flux';
 
 class Home extends React.Component{
     state = { name: '' };
+    STORAGE_NAME = "u_name";
+
+    componentWillMount(){
+        //Check if has name
+        AsyncStorage.getItem(this.STORAGE_NAME).then((value) => {
+            if(value != undefined){
+                Actions.chat({name: value})
+            }
+        }).done();
+    }
+
     render() {
         return(
             <View>
                 <Text style={styles.title}>
-                    Name:
+                    Chatbot: Challenge Taylor
+                </Text>
+
+                <Text style={styles.name_text}>
+                    Nickname:
                 </Text>
 
                 <TextInput 
@@ -24,8 +39,11 @@ class Home extends React.Component{
                 />
                 
                 <TouchableOpacity onPress={() =>{
-                    //Send data to the next page 
-                    Actions.chat({name: this.state.name})
+                    //Save name
+                    AsyncStorage.setItem(this.STORAGE_NAME, this.state.name).done(
+                        //Send data to the next page 
+                        Actions.chat({name: this.state.name})
+                    );
                 }}>
                     <Text style={styles.button}>
                         Enter
@@ -38,8 +56,15 @@ class Home extends React.Component{
 }
 
 var styles = StyleSheet.create({
+    
     title: {
         margin:20,
+        fontSize: 22,
+        alignSelf: 'center'
+    },
+    name_text: {
+        marginLeft:20,
+        marginTop:20,
         fontSize: 20
     },
     nameInput:{

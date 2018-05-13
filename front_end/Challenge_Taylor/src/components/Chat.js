@@ -34,7 +34,6 @@ class Chat extends React.Component{
 
     //Mounting
     componentDidMount() {
-        alert("teste")
        Backend.loadAllMessages((message) => {
           this.setState((previousState) => {
             return {
