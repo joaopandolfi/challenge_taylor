@@ -34,7 +34,7 @@ class Chat extends React.Component{
 
     //Mounting
     componentDidMount() {
-       Backend.loadAllMessages((message) => {
+        Backend.initialize((message) => {
           this.setState((previousState) => {
             return {
               messages: GiftedChat.append(previousState.messages, message),
