@@ -12,7 +12,7 @@ export default class Ctapp extends React.Component {
     render(){
         return(
             <Router>
-                <Scene key='root' style={{paddingTop: Platform.OS === "ios" ? 65 : 55 }}>
+                <Scene key='root' style={{marginTop:20 ,paddingTop: Platform.OS === "ios" ? 65 : 55 }}>
                     <Scene key='home' title='Home' component={Home} />
                     <Scene key='chat' title='Chat' component={Chat} />
                 </Scene>
@@ -20,4 +20,3 @@ export default class Ctapp extends React.Component {
         );
     }
 }
-
