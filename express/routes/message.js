@@ -1,7 +1,15 @@
+/*
+* Responsible to control all messages received
+*/
+
 var eth_api = require("./util/eth_api.js")
 var config = require("../model/config.js")
 var responses = require("../model/responses.js")
 
+/*
+* @param resp (data reiceived from server) {success: 1 or 0, error: (int), data: {}}
+* @return formated (text formated data) {string}
+*/
 function format_tax_response(resp){
 	let formated = "";
 	if(resp.success == 1){
@@ -21,6 +29,10 @@ function format_tax_response(resp){
 	return formated
 }
 
+/*
+* @param resp (data reiceived from server) {success: 1 or 0, error: (int), data: {}}
+* @return formated (text formated data) {string}
+*/
 function format_wallet_reponse(resp){
 	let formated = "";
 	if(resp.success == 1){ 
@@ -35,17 +47,17 @@ module.exports = {
 	receive: (req,res) =>{
 		//console.log(req.query)
 		let message = req.query.message
-		console.log(message)
+		console.log(message) // debug
 
 		//Get tax
-		if(message.search("/getTx") >= 0){
-			let tx = message.split(" ");
+		if(message.search("/getTx") == 0){
+			let tx = message.split(" "); //splitting command
 			eth_api.consumeAPI(config.api.tx,tx.pop(), (result)=>{
 				res.send(format_tax_response(result))
 			})
 		}
 		//Get Wallet Balance
-		else if(message.search("/getBalance") >= 0){
+		else if(message.search("/getBalance") == 0){
 			let wallet = message.split(" ");
 			eth_api.consumeAPI(config.api.wallet,wallet.pop(), (result)=>{
 				res.send(format_wallet_reponse(result))

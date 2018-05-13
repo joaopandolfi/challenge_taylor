@@ -37,10 +37,7 @@ app.use(morgan("common"));
 app.use('/', router);
 
 
-//=== Initializing Servers
-//var httpServer = http.createServer(app);
-
+//=== Initializing Server
 app.listen(config.http_port, function () {
-
 	console.log("Listening at :%s", config.http_port);
 });

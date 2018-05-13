@@ -4,6 +4,7 @@
   "description": "Challenge Taylor",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "test.js"
   },
   "repository": {
