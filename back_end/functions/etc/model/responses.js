@@ -3,7 +3,7 @@
 */
 
 module.exports = {
-	get_tx: " Status: Success \n Block Height: {block_heigth} \n TimeStamp: {calc_timestamp} ({timestamp}) \n From: {from} To: {to} Value: {value} Ether \n Gas Limit: {limit} \n Gas Used By Txn: {txn} \n Gas Price: {price}",
+	get_tx: "Status: Success \n \rBlock Height: {block_heigth} \n \rTimeStamp: {calc_timestamp} ({timestamp}) \n \rFrom: {from} \n \rTo: {to} \n \rValue: {value} Ether \n \rGas Limit: {limit} \n \rGas Used By Txn: {txn} \n \rGas Price: {price}",
 	get_balance : "Balance {price}",
 
 	random: [

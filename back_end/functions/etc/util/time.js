@@ -13,7 +13,8 @@ module.exports = {
     const msecPerYear = 31536000000;
 
     let currentDate = new Date();
-
+    date = new Date(date);
+    
     result = "";
 
     // Get the difference in milliseconds.
