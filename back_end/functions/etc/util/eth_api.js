@@ -15,27 +15,32 @@ module.exports = { consumeAPI:(config,service,value,callback)=>{
 
 		console.log(callUrl);
 
-		https.get(callUrl, (res) =>{
+		https.get(callUrl, (res)=>{
 
-	  		console.log("Got response: " + res.statusCode);
 
-	  		if(res.statusCode === 404)
-	  			return callback({success:0,error:404,data:{}});
+				if(res.statusCode === 404)
+					return callback({success:0,error:404,data:{}});
 
-	   		res.setEncoding('utf8');
+				res.setEncoding('utf8');
 
-	  		res.on('data',  (chunk) =>{
-		   		data += chunk;
-	  		});
+				res.on('data',  (chunk) =>{
+					data += chunk;
+				});
 
-		  	res.on('end', (e)=>{
+				res.on('end', (e)=>{
+					result = {success:1,error:0,data:{}}
+					console.log("DEBUG: "+data);
 
-		  		console.log("DEBUG: "+data);
+					parsed = JSON.parse(data);
 
-				parsed = JSON.parse(data);
-				return callback({success:1,error:0,data:parsed});
+					//Checking if has no result
+					result.success = (Object.keys(parsed).length > 0 ) ? 1: 0;
+
+					console.log(result)
+
+					result.data = parsed
+					callback(result);
 			});
-			return 0 ;
 		}).on('error', (e) =>{
 			console.log("Got error: " + e.message);
 		});

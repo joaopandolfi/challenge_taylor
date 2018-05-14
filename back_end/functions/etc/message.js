@@ -15,7 +15,7 @@ function format_tax_response(resp){
 		.replace("{from}",tx.from)
 		.replace("{to}",tx.to)
 		.replace("{value}",tx.value)
-		.replace("{limit}",tx.limit)
+		.replace("{limit}",tx.gas)
 		.replace("{txn}",tx.gasused)
 		.replace("{price}",tx.gasprice)
 		//.replace("{}",data.)
@@ -43,15 +43,15 @@ module.exports = {
 	receive:(message,callback) =>{
 				//Get tax
 				if(message.search("/getTx") === 0){
-					let tx = message.split(" "); //splitting command
-					eth_api.consumeAPI(config,config.api.tx,tx.pop(), (result)=>{
+					let tx = message.slice(7); //splitting command
+					eth_api.consumeAPI(config,config.api.tx,tx, (result)=>{
 						callback(format_tax_response(result));
 					})
 				}
 				//Get Wallet Balance
 				else if(message.search("/getBalance") === 0){
-					let wallet = message.split(" ");
-					eth_api.consumeAPI(config,config.api.wallet,wallet.pop(), (result)=>{
+					let wallet = message.slice(12);//message.split(" ");
+					eth_api.consumeAPI(config,config.api.wallet,wallet, (result)=>{
 						callback(format_wallet_reponse(result))
 					})
 				}
