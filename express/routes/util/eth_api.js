@@ -17,8 +17,8 @@ module.exports = { consumeAPI:(service,value,callback)=>{
 
 		//Request
 		https.get(callUrl, (res)=>{
-	  		
-	  		
+
+
 	  		if(res.statusCode === 404)
 	  			return callback({success:0,error:404,data:{}});
 
@@ -34,7 +34,7 @@ module.exports = { consumeAPI:(service,value,callback)=>{
 
 		  		//Checking if has no result
 		  		if(data == "{}") result.success = 0;
-				
+
 				parsed = JSON.parse(data);
 				result.data = parsed
 				callback(result);
