@@ -12,6 +12,9 @@ class Backend{
     messagesPointer = null;
     savedMessages = [];
 
+    /*
+    * Constructor method
+    */
     constructor(){
         //Initializing firebase
         firebase.initializeApp({
@@ -28,8 +31,11 @@ class Backend{
           });
     }
 
+    /*
+    * Initialize Backend
+    * @param callback (Callback function after load stored messages and initialize Firebase)
+    */
     initialize(callback){
-        //AsyncStorage.setItem(this.STORAGE_MESSAGES,JSON.stringify([]));
         this.loadSavedMessages(()=>{
             this.savedMessages.forEach((message)=>{
                 if(message) callback(message)
@@ -42,6 +48,10 @@ class Backend{
         });
     }
 
+    /*
+    * Initialize Firebease Auth
+    * @param callback (Callback function after initilize Firebase Auth)
+    */
     initializeFirebaseAuth(callback){
         //Getting Auth
         firebase.auth().onAuthStateChanged((credentials) => {
@@ -56,14 +66,19 @@ class Backend{
     }
 
     
-    //Initialize FirebaseDb
+    /*
+    * Initialize Firebease Db
+    */
     initializeFirebaseDb(){
         this.messagesPointer = firebase.database().ref(this.FIREBASE_MESSAGES+"/"+this.uid);
         this.messagesPointer.off();
     }
 
 
-    //Mudar
+    /*
+    * Send message to Firebase Db
+    * @param message (Message to send) {text:(String), user: { _id: (hash), name: (String)}}
+    */
     sendMessage(message){
         for (let i = 0; i < message.length; i++) {
             this.messagesPointer.push({
@@ -75,7 +90,11 @@ class Backend{
           }
     }
 
-    //Load messages from firebase
+    /*
+    * - Load Firebase Messages and format to UI
+    * - Save messages on local storage
+    * @param callback (callback function to send formated message)
+    */
     loadServerMessages(callback){
         this.initializeFirebaseDb();
 
@@ -102,17 +121,24 @@ class Backend{
             
         };
 
+        //Ser "trigger" on firebase db
         this.messagesPointer.limitToLast(20).on('child_added', onReceive);   
     }
 
     
+    /*
+    * End cycle
+    */
     end(){
         if (this.messagesPointer) this.messagesPointer.off();
     }
 
-    // ===
+    // === Local Storage Functions ===
     
-    // Local Storage
+    /*
+    * Load all saved Messages on Local Storage
+    * @param callback (callback functin after load messages)
+    */
     loadSavedMessages(callback){
         AsyncStorage.getItem(this.STORAGE_MESSAGES).then((value) => {
             if(value != null && value != undefined) this.setNewMessage(JSON.parse(value));
@@ -121,7 +147,11 @@ class Backend{
         }).done();
     }
 
-    //Save message on Local Storage
+    /*
+    * - Save message on local storage
+    * - Check if message is already on buffer
+    * @param message (Message to Save) {_id:(String), text:(String), user: { _id: (hash), name: (String)}}
+    * */
     saveMessage(message){
         
         //Search message on buffer
@@ -141,6 +171,7 @@ class Backend{
 
     //Gets and Setters
 
+    //Set uid and Save on Local Storage
     setUid(value) {
         this.uid = value;
         AsyncStorage.setItem(this.STORAGE_UID, this.uid);
