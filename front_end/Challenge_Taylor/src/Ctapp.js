@@ -14,7 +14,7 @@ export default class Ctapp extends React.Component {
             <Router>
                 <Scene key='root' style={{marginTop:20 ,paddingTop: Platform.OS === "ios" ? 65 : 55 }}>
                     <Scene key='home' title='Home' component={Home} />
-                    <Scene key='chat' title='Chat' component={Chat} />
+                    <Scene key='chat' title='Chatbot Challenge' component={Chat} />
                 </Scene>
             </Router>
         );

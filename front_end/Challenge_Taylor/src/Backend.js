@@ -42,8 +42,6 @@ class Backend{
         });
     }
 
-
-    
     initializeFirebaseAuth(callback){
         //Getting Auth
         firebase.auth().onAuthStateChanged((credentials) => {
@@ -120,7 +118,7 @@ class Backend{
 
     //Save message on Local Storage
     saveMessage(message){
-        console.log(message)
+        
         //Search message on buffer
         let found = this.savedMessages.find((m)=>{
             if(m)
