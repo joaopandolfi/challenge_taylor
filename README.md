@@ -1,21 +1,46 @@
-# challenge_taylor
+# Challenge Taylor.io
+
+[a relative Desafio](taylor-fullstack-challenge.md) proposto pela Taylor.io
+
+## Conteúdo
+- Backend (Firebase Functions)
+- Frontend (react-native)
 
 
-#Firebase
+## Configurando
+- Instalar [a nodejs](https://nodejs.org/en/download/)
+- Instalar [a react-native](https://facebook.github.io/react-native/docs/getting-started.html)
+ 
 
-firebase deploy
+## Executando
 
-ou
-
-firebase deploy -- only functions
-
-#Front
-Build
+### Backend
+Navegue até o diretório *back_end/*
 ```
-exp build:android
+	npm install
+	firebase deploy
 ```
 
+### Front
+- Configurando
+Acesse o arquivo *front_end/Challenge/src/Backend.js*
+```
+Troque suas credenciais do Firebase
 
-(in project directory) mkdir android/app/src/main/assets
-react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res
-react-native run-android
+	firebase.initializeApp({
+		apiKey: 'XXXXXX',
+		authDomain: 'XXXX.firebaseapp.com',
+		databaseURL: 'https://XXXXX.firebaseio.com',
+		storageBucket: 'XXXX.appspot.com',
+		//persistence: true
+	  });
+
+```
+
+- Executando
+Navegue para *front_end/Challenge/*
+```
+	npm install
+	./bundle.bat
+	react-native run-android
+```
